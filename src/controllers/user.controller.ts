@@ -16,3 +16,7 @@ async function show_profile(req: Request, res: Response, next: NextFunction) {
     }
 
 }
+
+export {
+    show_profile
+};
