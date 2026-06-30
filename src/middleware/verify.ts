@@ -15,23 +15,23 @@ async function authenticate_user(req: Request, res: Response, next: NextFunction
 
     try {
 
-        const { access_token } = req.cookies;
+        const token = req.headers?.authorization?.split(" ")[1];
 
-        if (!access_token) {
+        if (!token) {
             return res.status(403).json({
                 message: "Access Forbidden"
             });
         }
 
-        const valid_user = jwt.verify(access_token, process.env.JWT_SECRET!);
+        const user = jwt.verify(token, process.env.JWT_SECRET!);
 
-        if (!valid_user) {
+        if (!user) {
             return res.status(401).json({
-                message: "Unauthorized Access"
+                message: "Unauthorized Access, Expired or Invalid token"
             });
         }
 
-        req.user = valid_user;
+        req.user = user;
 
         next();
 

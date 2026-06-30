@@ -4,6 +4,7 @@ import type { Request, Response, NextFunction } from "express";
 import { eq, or } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import type { IRegisterBody } from "../interfaces/auth.interface.js"
 
 async function register(req: Request, res: Response, next: NextFunction) {
 
@@ -11,11 +12,11 @@ async function register(req: Request, res: Response, next: NextFunction) {
 
         const {
             first_name,
-            last_name,
             email,
-            phone,
-            password
-        } = req.body;
+            last_name, 
+            password, 
+            phone
+        }: IRegisterBody = req.body;
 
         if (!first_name || !last_name || !email || !phone || !password) {
             return res.status(400).json({
@@ -29,7 +30,8 @@ async function register(req: Request, res: Response, next: NextFunction) {
                     eq(User.email, email),
                     eq(User.phone, phone)
                 )
-            ).limit(1);
+            )
+            .limit(1);
 
         if (existing_user) {
             return res.status(409).json({
