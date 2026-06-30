@@ -106,10 +106,9 @@ async function login(req: Request, res: Response, next: NextFunction) {
             { expiresIn: '2h'}
         );
 
-        res.cookie('access_token', token);
-
         return res.status(200).json({
-            message: "User logged in successful"
+            message: "User logged in successful",
+            token
         });
 
     } catch (error) {

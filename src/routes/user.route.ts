@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { show_profile } from "../controllers/user.controller.js";
-import { authenticate_user } from "../middleware/verify.js"
+import { showProfile } from "../controllers/user.controller.js";
+import { authenticateUser } from "../middleware/verify.js"
 
 const router: Router = Router();
 
-router.use(authenticate_user);
+router.use(authenticateUser);
 
 router
-    .get('/profile', show_profile)
+    .get('/profile', showProfile)
 
 export default router;

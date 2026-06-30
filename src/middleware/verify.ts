@@ -11,7 +11,7 @@ declare global {
     }
 }
 
-async function authenticate_user(req: Request, res: Response, next: NextFunction) {
+async function authenticateUser(req: Request, res: Response, next: NextFunction) {
 
     try {
 
@@ -45,5 +45,5 @@ async function authenticate_user(req: Request, res: Response, next: NextFunction
 }
 
 export {
-    authenticate_user
+    authenticateUser
 };
